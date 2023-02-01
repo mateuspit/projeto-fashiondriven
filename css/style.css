@@ -1,0 +1,169 @@
+* {
+    box-sizing: border-box;
+}
+
+header{
+    width: 1366px;
+    height:  89px;
+    background-color: #404EED;
+}
+
+.logo img{
+    margin-top: 16px;
+    margin-left: 83px;
+}
+
+.tshirtImg, .camisetaImg, .mangaLongaImg, .golavImg, .golaRedondaImg, .golaPoloImg, .sedaImg, .algodaoImg, .poliesterImg{
+    width: 100px;
+    height: 100px;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 0.5px #c4c4c4;
+}
+
+main{
+    display: flex;
+}
+
+.orderSpot{
+    width: 683px;
+    height: 785px;
+    background-color: white;
+}
+
+.illustrationSpot{
+    width: 683px;
+    height: 785px;
+    background-color: #404EED;   
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.modelTitle, .collarTitle, .fabricTitle, .modelOptions,.collarOptions, .fabricOptions, .referenceTitle{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #232323;
+    margin-bottom: 9px;
+}
+
+.referenceClothes{
+    margin-left: 125px;
+    margin-bottom: 24px;
+}
+.modelOptions, .collarOptions, .fabricOptions{
+    display: flex;
+}
+
+.inputReferenceLink{
+    margin-bottom: 24px;
+}
+
+.buttonFinishOrder{
+    width: 400px;
+    height: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: white;
+    background-color: #c4c4c4;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 125px;    
+}
+
+.lastOrders{
+    background-color: #f2f2f2;
+    width: 1366px;
+    height: 342px;
+}
+
+
+.lastOrdersTitle{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    color: #232323;
+    padding-top: 30px;
+    margin-bottom: 32px;
+    margin-left: 125px;
+}
+
+.lastOrderOption{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 235px;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 16px;
+}
+
+span{
+    font-weight: 700;
+}
+.lastOrderOptionImg{
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lastOrderSpot{
+    display: flex;
+    margin-left: 125px;
+}
+
+.inputReferenceLink input{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: black;
+    text-align: left;   
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 16px;
+    border: none;
+    background-color: #f2f2f2;
+}
+
+.inputReferenceLink input::placeholder{
+    color: #818181;
+}
+
+
+
+
+.tshirtOption, .camisetaOption, .mangaLongaOption, .golavOption, .golaRedondaOption, .golaPoloOption, .sedaOption, .algodaoOption, .poliesterOption{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;   
+    margin-bottom: 32px;     
+    margin-right: 40px;
+}
+
+.tshirtText, .camisetaText, .mangaLongaText, .golavText, .golaRedondaText, .golaPoloText, .sedaText, .algodaoText, .poliesterText{
+    margin-top: 8px;
+}
+
+
+
+
+.optionsClothes{
+    margin-top: 38px;
+    margin-left: 125px;
+}
+
+
+
