@@ -24,6 +24,21 @@ header{
     border: solid 0.5px #c4c4c4;
 }
 
+.tshirtImg:hover, .camisetaImg:hover, .mangaLongaImg:hover, .golavImg:hover, .golaRedondaImg:hover, .golaPoloImg:hover, .sedaImg:hover, .algodaoImg:hover, .poliesterImg:hover{
+    background-color: #c4c4c4;
+    /* opacity: 0.5; */
+}
+
+
+
+.selected{
+    border: solid 6px #404EED;
+}
+
+
+
+
+
 main{
     display: flex;
 }
@@ -78,6 +93,15 @@ main{
     margin-left: 125px;    
 }
 
+.buttonFinishOrder:hover{
+    background-color: #404EED;    
+    opacity: 0.5;
+}
+
+.buttonReady{
+    background-color: #404edd;    
+}
+
 .lastOrders{
     background-color: #f2f2f2;
     width: 1366px;
@@ -116,6 +140,11 @@ span{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 8px;
+}
+
+.lastOrderOptionImg:hover{
+    transform: scale(1.5)
 }
 
 .lastOrderSpot{
