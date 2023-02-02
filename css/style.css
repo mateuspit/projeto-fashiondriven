@@ -226,7 +226,7 @@ span{
     height: 40px;
     color: white;
     background-color: #404EED;
-    margin-top: 50px;
+    margin-top: 30px;
     border-radius: 10px;
     border: solid 2px white;
 }
@@ -248,15 +248,21 @@ span{
     padding-right: 100px
 } */
 .loginTitle{
-    padding-top: 100px;
+    padding-top: 80px;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 30px;
     color: white; 
+    padding-bottom: 50px;
 }
-.whatYourName{
+
+.loginLogo{
+    padding-bottom: 50px;
+    /* padding-left: 70px; */
+}
+/* .whatYourName{
     padding-top: 130px;    
-}
+} */
 /* .inputLogin{
     padding-top: ;
 } */
