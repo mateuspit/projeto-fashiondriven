@@ -4,6 +4,7 @@ let optionFabricSelected = false;
 let inputLinkWritted = false;
 let openFinishButton = false;
 
+let objectWithChoices;
 let stringModelChosen, stringCollarChosen, stringFabricChosen;
 let author, owner, link;
 // author = "tset";
@@ -111,7 +112,7 @@ function sendInfosToApi(){
     postPromisse.then(request => console.log("deu bom"));
     postPromisse.catch(request => console.log("deu ruim"));
 }
-function receiveLastDataOrders(){
+async function receiveLastDataOrders(){
     const getPromisse = axios.get('https://mock-api.driven.com.br/api/v4/shirts-api/shirts');    
 
     getPromisse.then(function (response) {
@@ -141,17 +142,38 @@ function finishOrder(){
     document.getElementById("referenceInputLink").value = "";
 }
 
-function goToLoadingScreen(){
+function renderMainPage(){
+    elementLastOrderSpot = document.querySelector(".lastOrderSpot");
+    console.log(objectWithChoices);
+
+    for(let i = 0; i < 5; i++){
+        elementLastOrderSpot = `
+        <div class="lastOrderOptionImg">
+            <img src="${objectWithChoices[i].image}" alt="Last order ${i+1}">
+        </div>
+        <div class="lastOrderOptionTitle">
+            <span>Criador:</span> ${objectWithChoices[i].owner}                        
+        </div>
+        `;      
+    }
+
+}
+
+async function goToLoadingScreen(){
     const elementLoginPage = document.querySelector(".loginPage");
     const  elementLoadingPage = document.querySelector(".loadingPage");
     elementLoginPage.classList.add("hide");
     elementLoadingPage.classList.remove("hide");
+    objectWithChoices = await receiveLastDataOrders();
+    renderMainPage();  
 }
 
 document.querySelector('#loginInput').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
       author = owner = document.getElementById("loginInput").value;
       goToLoadingScreen();
+      document.getElementById("loginInput").value = "";
     }
+    
 });
 
