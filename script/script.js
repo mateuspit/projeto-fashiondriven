@@ -4,6 +4,11 @@ let optionFabricSelected = false;
 let inputLinkWritted = false;
 let openFinishButton = false;
 
+let stringModelChosen, stringCollarChosen, stringFabricChosen;
+let author, owner, link;
+author = "tset";
+owner = "test";
+
 
 
 
@@ -15,7 +20,19 @@ function selectingOptionModel(elementSelected){
         unselectOption.classList.remove("selected");
     }    
     elementModel.classList.toggle("selected");  
-    optionModelSelected = true;  
+    optionModelSelected = true;
+    stringModelChosen = elementSelected.querySelector('[class*="Text"]').innerHTML;
+    switch (stringModelChosen) {
+        case "T-shirt":
+            stringModelChosen = "t-shirt";
+            break;    
+        case "Camiseta":
+            stringModelChosen = "top-tank";
+            break;            
+        case "Manga Longa":
+            stringModelChosen = "long";
+            break;
+    }
 }
 
 function selectingOptionCollar(elementSelected){
@@ -26,7 +43,19 @@ function selectingOptionCollar(elementSelected){
     }
     let elementCollar = elementSelected.querySelector('[class*="Img"]');
     elementCollar.classList.add("selected"); 
-    optionCollarSelected = true;
+    optionCollarSelected = true;    
+    stringCollarChosen = elementSelected.querySelector('[class*="Text"]').innerHTML;
+    switch (stringCollarChosen) {
+        case "Gola V":
+            stringCollarChosen = "v-neck";        
+            break;    
+        case "Gola Redonda":
+            stringCollarChosen = "round"; 
+            break;            
+        case "Gola Polo":
+            stringCollarChosen = "polo";
+            break;
+    }
 }
 
 function selectingOptionFabric(elementSelected){
@@ -38,6 +67,18 @@ function selectingOptionFabric(elementSelected){
     let elementFabric = elementSelected.querySelector('[class*="Img"]');
     elementFabric.classList.add("selected"); 
     optionFabricSelected = true;
+    stringFabricChosen = elementSelected.querySelector('[class*="Text"]').innerHTML;
+    switch (stringFabricChosen) {
+        case "Seda":
+            stringFabricChosen = "silk";        
+            break;    
+        case "Algodão":
+            stringFabricChosen = "cotton"; 
+            break;            
+        case "Poliéster":
+            stringFabricChosen = "polyester";
+            break;
+    }
 }
 
 function linkValidation(){
@@ -48,11 +89,31 @@ function linkValidation(){
     }    
     let endLink =  endLinkReversed.split('').reverse().join('');
     inputLinkWritted = endLink.includes(".jpeg") || endLink.includes(".png") || endLink.includes(".jpg");
+    link = document.getElementById("referenceInputLink").value;      
 }
 
 function finishButtonValidation(){
     openFinishButton = optionModelSelected && optionCollarSelected && optionFabricSelected && inputLinkWritted;
 }
+
+function sendInfosToApi(){
+    const objectWithChoices = {
+        model: stringModelChosen,
+        neck: stringCollarChosen,
+        material: stringFabricChosen,
+        image: link,
+        owner: owner,
+        author: author
+    }
+
+    const postPromisse = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", objectWithChoices);
+
+    postPromisse.then(request => console.log("deu bom"));
+    // postPromisse.then(request => console.log(request); console.log("deu bom"););
+    // postPromisse.catch(request => console.log(request); console.log("deu ruim"););
+    postPromisse.catch(request => console.log("deu ruim"));
+}
+
 
 
 function finishOrder(){
@@ -61,9 +122,10 @@ function finishOrder(){
     // console.log(openFinishButton);
     if(openFinishButton){
         alert("Seu pedido foi enviado!");
+        sendInfosToApi();
     }
     else {
         alert("Por favor, escolha o modelo, a gola, o tecido e insira um link valido");
-    }
-
+    }    
+    document.getElementById("referenceInputLink").value = "";
 }
