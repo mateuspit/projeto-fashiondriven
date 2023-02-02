@@ -107,6 +107,11 @@ main{
     opacity: 0.5;
 }
 
+.buttonFinishOrderReady{
+    background-color: #404EED;
+}
+
+
 .buttonReady{
     background-color: #404edd;    
 }
@@ -144,12 +149,16 @@ span{
     font-weight: 700;
 }
 .lastOrderOptionImg{
-    width: 180px;
-    height: 180px;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 8px;
+}
+
+.lastOrderOptionImg img{
+    width: 180px;
+    height: 180px;
 }
 
 .lastOrderOptionImg:hover{
@@ -208,6 +217,19 @@ span{
     font-size: 14px;
     color: white;    
 }
+
+.loginButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: #404EED;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: solid 2px white;
+}
 .inputLogin input{
     background-color: transparent;
     border-radius: 10px;
@@ -216,7 +238,7 @@ span{
     color:white;
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-
+    padding-left: 20px;
 }
 .inputLogin input:focus{
     box-shadow: 0 0 0 0;

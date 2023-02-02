@@ -3,12 +3,30 @@ let optionCollarSelected = false;
 let optionFabricSelected = false;
 let inputLinkWritted = false;
 let openFinishButton = false;
+let sendedOrder = false;
+let vallidButon = false;
 
 let objectWithChoices;
 let stringModelChosen, stringCollarChosen, stringFabricChosen;
 let author, owner, link;
 // author = "tset";
 // owner = "test";
+
+function justButtonsValidation(){
+    vallidButon = (document.getElementById("referenceInputLink").value !== "") && optionModelSelected && optionCollarSelected && optionFabricSelected;
+    return vallidButon;
+}
+
+function buttonHighLight(){
+    let elementButtonFinishOrder = document.querySelector(".buttonFinishOrder");
+    if(justButtonsValidation()){
+        // console.log(elementButtonFinishOrder);
+        elementButtonFinishOrder.classList.add("buttonFinishOrderReady");
+        return;
+    }
+    elementButtonFinishOrder.classList.remove("buttonFinishOrderReady");
+
+}
 
 
 
@@ -34,6 +52,9 @@ function selectingOptionModel(elementSelected){
             stringModelChosen = "long";
             break;
     }
+    // debugger;
+    buttonHighLight();
+    
 }
 
 function selectingOptionCollar(elementSelected){
@@ -57,6 +78,9 @@ function selectingOptionCollar(elementSelected){
             stringCollarChosen = "polo";
             break;
     }
+    // debugger;
+    buttonHighLight();
+    
 }
 
 function selectingOptionFabric(elementSelected){
@@ -80,17 +104,20 @@ function selectingOptionFabric(elementSelected){
             stringFabricChosen = "polyester";
             break;
     }
+    buttonHighLight();
 }
 
 function linkValidation(){
     let valueInputReferenceLink = document.getElementById("referenceInputLink").value;
-    let endLinkReversed = "";
-    for(let i = (valueInputReferenceLink.length - 1); i>(valueInputReferenceLink.length - 6); i--){
-        endLinkReversed += valueInputReferenceLink[i];
-    }    
-    let endLink =  endLinkReversed.split('').reverse().join('');
-    inputLinkWritted = endLink.includes(".jpeg") || endLink.includes(".png") || endLink.includes(".jpg") || endLink.includes(".bmp");
-    link = document.getElementById("referenceInputLink").value;      
+    // let endLinkReversed = "";
+    // for(let i = (valueInputReferenceLink.length - 1); i>(valueInputReferenceLink.length - 6); i--){
+    //     endLinkReversed += valueInputReferenceLink[i];
+    // }    
+    // let endLink =  endLinkReversed.split('').reverse().join('');
+    valueInputReferenceLink = document.getElementById("referenceInputLink").value; 
+    inputLinkWritted = valueInputReferenceLink.includes(".jpeg") || valueInputReferenceLink.includes(".png") || valueInputReferenceLink.includes(".jpg") || valueInputReferenceLink.includes(".bmp") || valueInputReferenceLink.includes("?") || valueInputReferenceLink.includes("file");
+    link = document.getElementById("referenceInputLink").value;  
+    document.getElementById("referenceInputLink").value = "";
 }
 
 function finishButtonValidation(){
@@ -109,63 +136,81 @@ function sendInfosToApi(){
 
     const postPromisse = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", sendableObjectWithChoices);
 
-    postPromisse.then(request => console.log("deu bom"));
-    postPromisse.catch(request => console.log("deu ruim"));
+    return postPromisse.then(function sendRequest(){
+        sendedOrder = true;
+    });
+
+    // postPromisse.catch(request => console.log("deu ruim"));
 }
+
 async function receiveLastDataOrders(){
     const getPromisse = axios.get('https://mock-api.driven.com.br/api/v4/shirts-api/shirts');    
 
-    getPromisse.then(function (response) {
-        console.log(response.data);
+    return getPromisse.then(function (response) {
         return response.data;
     });
-    // getPromisse.then(request => receiveObjectWithChoices = request);
-    // getPromisse.catch(request => receiveObjectWithChoices = request);
-
 }
 
 // receiveLastDataOrders();
 
 
 
-function finishOrder(){
+
+
+async function finishOrder(){
     linkValidation();
     finishButtonValidation();
     // console.log(openFinishButton);
-    if(openFinishButton){
+    await sendInfosToApi();
+    if(openFinishButton && sendedOrder){
         alert("Seu pedido foi enviado!");
-        sendInfosToApi();
+        sendedOrder = false;
+        console.log("antes");
+        // debugger;
+        objectWithChoices = await receiveLastDataOrders();
+        renderMainPage();
+        console.log("depois");
     }
     else {
         alert("Por favor, escolha o modelo, a gola, o tecido e insira um link valido");
-    }    
-    document.getElementById("referenceInputLink").value = "";
+    }
 }
 
 function renderMainPage(){
-    elementLastOrderSpot = document.querySelector(".lastOrderSpot");
-    console.log(objectWithChoices);
+    let elementLastOrderSpot = document.querySelector(".lastOrderSpot");
 
-    for(let i = 0; i < 5; i++){
-        elementLastOrderSpot = `
-        <div class="lastOrderOptionImg">
-            <img src="${objectWithChoices[i].image}" alt="Last order ${i+1}">
-        </div>
-        <div class="lastOrderOptionTitle">
-            <span>Criador:</span> ${objectWithChoices[i].owner}                        
+    elementLastOrderSpot.innerHTML = "";
+
+    for(let i = 0; i < 6; i++){
+        elementLastOrderSpot.innerHTML += `
+        <div class="lastOrderOption">
+            <div class="lastOrderOptionImg">
+                <img src="${objectWithChoices[i].image}" alt="Last order ${i+1}">
+            </div>
+            <div class="lastOrderOptionTitle">
+                <span>Criador:</span> ${objectWithChoices[i].owner}                        
+            </div>
         </div>
         `;      
     }
 
+    let elementLoadingPage = document.querySelector(".loadingPage");
+    let elementMainPage = document.querySelector(".mainPage");
+    elementLoadingPage.classList.add("hide");
+    elementMainPage.classList.remove("hide");
+
 }
 
 async function goToLoadingScreen(){
+    
     const elementLoginPage = document.querySelector(".loginPage");
     const  elementLoadingPage = document.querySelector(".loadingPage");
     elementLoginPage.classList.add("hide");
     elementLoadingPage.classList.remove("hide");
+
     objectWithChoices = await receiveLastDataOrders();
-    renderMainPage();  
+    renderMainPage();
+    document.getElementById("referenceInputLink").value = ""
 }
 
 document.querySelector('#loginInput').addEventListener('keypress', function (e) {
@@ -176,4 +221,19 @@ document.querySelector('#loginInput').addEventListener('keypress', function (e) 
     }
     
 });
+
+function buttonLoginPress(){
+    author = owner = document.getElementById("loginInput").value;
+    goToLoadingScreen();
+    document.getElementById("loginInput").value = "";
+}
+
+document.querySelector('#referenceInputLink').addEventListener('keyup', function (e) {
+    if (e.key === 'Enter') {
+        finishOrder();
+    }
+    buttonHighLight();
+});
+
+
 
