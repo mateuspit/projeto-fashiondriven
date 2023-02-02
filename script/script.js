@@ -136,11 +136,13 @@ function sendInfosToApi(){
 
     const postPromisse = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", sendableObjectWithChoices);
 
+    postPromisse.catch(request => alert("Por favor, escolha o modelo, a gola, o tecido e insira um link valido"));
+
     return postPromisse.then(function sendRequest(){
         sendedOrder = true;
     });
 
-    // postPromisse.catch(request => console.log("deu ruim"));
+    
 }
 
 async function receiveLastDataOrders(){
@@ -158,20 +160,22 @@ async function receiveLastDataOrders(){
 
 
 async function finishOrder(){
+    // console.log("test1");
     linkValidation();
+    // console.log("test2");
     finishButtonValidation();
+    // console.log("test3");
     // console.log(openFinishButton);
     await sendInfosToApi();
+    // console.log("test4");
     if(openFinishButton && sendedOrder){
         alert("Seu pedido foi enviado!");
         sendedOrder = false;
-        console.log("antes");
-        // debugger;
         objectWithChoices = await receiveLastDataOrders();
         renderMainPage();
-        console.log("depois");
     }
     else {
+        // console.log("test");
         alert("Por favor, escolha o modelo, a gola, o tecido e insira um link valido");
     }
 }
