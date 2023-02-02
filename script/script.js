@@ -97,7 +97,7 @@ function finishButtonValidation(){
 }
 
 function sendInfosToApi(){
-    const objectWithChoices = {
+    const sendableObjectWithChoices = {
         model: stringModelChosen,
         neck: stringCollarChosen,
         material: stringFabricChosen,
@@ -106,13 +106,24 @@ function sendInfosToApi(){
         author: author
     }
 
-    const postPromisse = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", objectWithChoices);
+    const postPromisse = axios.post("https://mock-api.driven.com.br/api/v4/shirts-api/shirts", sendableObjectWithChoices);
 
     postPromisse.then(request => console.log("deu bom"));
-    // postPromisse.then(request => console.log(request); console.log("deu bom"););
-    // postPromisse.catch(request => console.log(request); console.log("deu ruim"););
     postPromisse.catch(request => console.log("deu ruim"));
 }
+function receiveLastDataOrders(){
+    const getPromisse = axios.get('https://mock-api.driven.com.br/api/v4/shirts-api/shirts');    
+
+    getPromisse.then(function (response) {
+        console.log(response.data);
+        return response.data;
+    });
+    // getPromisse.then(request => receiveObjectWithChoices = request);
+    // getPromisse.catch(request => receiveObjectWithChoices = request);
+
+}
+
+receiveLastDataOrders();
 
 
 
@@ -129,3 +140,4 @@ function finishOrder(){
     }    
     document.getElementById("referenceInputLink").value = "";
 }
+
