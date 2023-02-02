@@ -6,8 +6,8 @@ let openFinishButton = false;
 
 let stringModelChosen, stringCollarChosen, stringFabricChosen;
 let author, owner, link;
-author = "tset";
-owner = "test";
+// author = "tset";
+// owner = "test";
 
 
 
@@ -88,7 +88,7 @@ function linkValidation(){
         endLinkReversed += valueInputReferenceLink[i];
     }    
     let endLink =  endLinkReversed.split('').reverse().join('');
-    inputLinkWritted = endLink.includes(".jpeg") || endLink.includes(".png") || endLink.includes(".jpg");
+    inputLinkWritted = endLink.includes(".jpeg") || endLink.includes(".png") || endLink.includes(".jpg") || endLink.includes(".bmp");
     link = document.getElementById("referenceInputLink").value;      
 }
 
@@ -123,7 +123,7 @@ function receiveLastDataOrders(){
 
 }
 
-receiveLastDataOrders();
+// receiveLastDataOrders();
 
 
 
@@ -140,4 +140,18 @@ function finishOrder(){
     }    
     document.getElementById("referenceInputLink").value = "";
 }
+
+function goToLoadingScreen(){
+    const elementLoginPage = document.querySelector(".loginPage");
+    const  elementLoadingPage = document.querySelector(".loadingPage");
+    elementLoginPage.classList.add("hide");
+    elementLoadingPage.classList.remove("hide");
+}
+
+document.querySelector('#loginInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      author = owner = document.getElementById("loginInput").value;
+      goToLoadingScreen();
+    }
+});
 

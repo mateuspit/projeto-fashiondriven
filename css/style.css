@@ -2,8 +2,17 @@
     box-sizing: border-box;
 }
 
+body{
+    background-color: #fbfbfb;
+}
+
+.loadingPage{
+    display: flex;
+    flex-direction: column;
+}
+
 header{
-    width: 1366px;
+    width: 100%;
     height:  89px;
     background-color: #404EED;
 }
@@ -44,13 +53,13 @@ main{
 }
 
 .orderSpot{
-    width: 683px;
+    width: 100%;
     height: 785px;
     background-color: white;
 }
 
 .illustrationSpot{
-    width: 683px;
+    width: 100%;
     height: 785px;
     background-color: #404EED;   
     display: flex;
@@ -104,7 +113,7 @@ main{
 
 .lastOrders{
     background-color: #f2f2f2;
-    width: 1366px;
+    width: 100%;
     height: 342px;
 }
 
@@ -170,6 +179,80 @@ span{
     color: #818181;
 }
 
+.login{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.loadingText{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    color: #404EED;     
+}
+.loadingPage{
+    width: 100%;
+    height:  100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 200px;
+}
+.whatYourName{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: white;    
+}
+.inputLogin input{
+    background-color: transparent;
+    border-radius: 10px;
+    width: 250px;
+    height: 30px;
+    color:white;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+
+}
+.inputLogin input:focus{
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+/* .loginInfos{
+    padding-right: 100px
+} */
+.loginTitle{
+    padding-top: 100px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: white; 
+}
+.whatYourName{
+    padding-top: 130px;    
+}
+/* .inputLogin{
+    padding-top: ;
+} */
+
+
+.loginSpot{
+    background: rgb(64,78,221);
+/* background: linear-gradient(360deg, rgba(64,78,221,1) 11%, rgba(64,78,221,0.46820726581648286) 66%, rgba(255,255,255,0) 100%); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 800px;
+    height: 500px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 100px;
+}
+
 
 
 
@@ -184,6 +267,9 @@ span{
 
 .tshirtText, .camisetaText, .mangaLongaText, .golavText, .golaRedondaText, .golaPoloText, .sedaText, .algodaoText, .poliesterText{
     margin-top: 8px;
+    /* display: flex;
+    flex-wrap: nowrap; */
+    white-space: nowrap;
 }
 
 
@@ -194,5 +280,8 @@ span{
     margin-left: 125px;
 }
 
+.hide{
+    display: none;
+}
 
 
